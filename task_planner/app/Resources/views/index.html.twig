@@ -9,7 +9,12 @@
         {% for task in tasks%}
             <p>Task: {{task.name}}</p>
             <p>Description: {{task.description}}</p>
-            <p>Due date: {{task.dueDate|date('Y-m-d H:i:s')}}</p>
+            <p>Due date: {{task.dueDate|date('Y-m-d H:i:s')}}</p> 
+            {%if task.checked == false %}
+                <p>Checked: No</p>
+            {% else %}
+                <p>Checked: Yes</p>
+            {%endif%}
         {%endfor%}
     </body>
 </html>

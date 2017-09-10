@@ -127,27 +127,4 @@ class Task
     {
         return $this->dueDate;
     }
-
-    /**
-     * Set checked
-     *
-     * @param boolean $checked
-     * @return Task
-     */
-    public function setChecked($checked)
-    {
-        $this->checked = $checked;
-
-        return $this;
-    }
-
-    /**
-     * Get checked
-     *
-     * @return boolean 
-     */
-    public function getChecked()
-    {
-        return $this->checked;
-    }
 }
