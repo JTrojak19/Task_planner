@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         $category = new Category(); 
         
-        $form = $this->createFormBuilder()
+        $form = $this->createFormBuilder($category)
                 ->add('name')
                 ->getForm(); 
         $form->handleRequest($request); 

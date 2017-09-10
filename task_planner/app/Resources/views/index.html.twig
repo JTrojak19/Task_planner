@@ -16,6 +16,9 @@
             {% else %}
                 <p>Checked: Yes</p>
             {%endif%}
+            {% if task.category.name %}
+                <p>Category: {% task.category.name %}</p>
+            {%endif%}
             <a href="{{path('app_task_modify', {'id': task.id})}}">Edit</a>
             <a href="{{path('app_task_delete', {'id': task.id})}}">Delete</a>
             <a href="{{path('app_category_addcategory')}}">Add Category</a>

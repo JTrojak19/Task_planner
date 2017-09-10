@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Task; 
+use AppBundle\Entity\Category; 
 
 class TaskController extends Controller
 {
@@ -19,7 +20,10 @@ class TaskController extends Controller
         $tasks = $this->getDoctrine()
                 ->getRepository('AppBundle:Task')
                 ->findAll(); 
-        return $this->render('index.html.twig', array('tasks' => $tasks));
+        $category = $this->getDoctrine()
+                ->getRepository('AppBundle:Category')
+                ->findAll(); 
+        return $this->render('index.html.twig', array('tasks' => $tasks, 'category' => $category));
     }
     /**
      * 
@@ -34,7 +38,7 @@ class TaskController extends Controller
                 ->add('description')
                 ->add('dueDate')
                 ->add('checked')
-                ->add('category')
+                ->add('category', null, ['choice_label' => 'name'])
                 ->getForm(); 
         $form->handleRequest($request); 
         
@@ -72,7 +76,7 @@ class TaskController extends Controller
                 ->add('description')
                 ->add('dueDate')
                 ->add('checked')
-                ->add('category')
+                ->add('category', null, ['choice_label' => 'name'])
                 ->getForm(); 
         $form->handleRequest($request);
         
