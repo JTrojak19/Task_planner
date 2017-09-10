@@ -25,7 +25,7 @@ class TaskController extends Controller
      * 
      * @Route("/add")
      */
-    public function addTastAction(Request $request) {
+    public function addTaskAction(Request $request) {
         
         $task = new Task(); 
         
@@ -48,5 +48,66 @@ class TaskController extends Controller
             'form' => $form->createView(), 
              ));
         
+    }
+    /**
+     * 
+     * @Route("/{id}/modify")
+     */
+    public function modifyAction(Request $request, $id)
+    {
+        $task = new Task(); 
+        $task = $this->getDoctrine()
+                ->getRepository('AppBundle:Task')
+                ->find($id); 
+        
+        if (!$task)
+        {
+            throw $this->createNotFoundException('Task not found');
+        }
+        
+        $form = $this->createFormBuilder($task)
+                ->add('name')
+                ->add('description')
+                ->add('dueDate')
+                ->add('checked')
+                ->getForm(); 
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid())
+         {
+             $task = $form->getData();
+             $em = $this->getDoctrine()->getManager();
+             $em->flush();
+             
+              return $this->redirectToRoute('app_task_index', array('id' => $task->getId()));
+         }
+         return $this->render('modify.html.twig', array(
+            'form' => $form->createView(), 
+             ));
+    }
+    /**
+     * 
+     * @Route("/{id}/delete")
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $task = new Task(); 
+        $task = $this->getDoctrine()
+                ->getRepository('AppBundle:Task')
+                ->find($id); 
+        
+        if (!$task)
+        {
+            throw $this->createNotFoundException('Task not found'); 
+        }
+        
+        $em = $this
+            ->getDoctrine()
+            ->getManager();
+
+        $em->remove($task);
+        $em->flush(); 
+        
+        return $this->redirectToRoute('app_task_index'); 
     }
 }
