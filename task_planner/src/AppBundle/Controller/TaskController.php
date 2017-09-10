@@ -12,6 +12,17 @@ class TaskController extends Controller
 {
     /**
      * 
+     * @Route("/")
+     */
+    public function indexAction()
+    {
+        $tasks = $this->getDoctrine()
+                ->getRepository('AppBundle:Task')
+                ->findAll(); 
+        return $this->render('index.html.twig', array('tasks' => $tasks));
+    }
+    /**
+     * 
      * @Route("/add")
      */
     public function addTastAction(Request $request) {

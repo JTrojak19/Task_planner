@@ -1,0 +1,15 @@
+{# empty Twig template #}
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Task planner</title>
+    </head>
+    <body>
+        <h1>Task Planner</h1>
+        {% for task in tasks%}
+            <p>Task: {{task.name}}</p>
+            <p>Description: {{task.description}}</p>
+            <p>Due date: {{task.dueDate|date('Y-m-d H:i:s')}}</p>
+        {%endfor%}
+    </body>
+</html>
