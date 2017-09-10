@@ -48,7 +48,10 @@ class Task
      * @ORM\Column(name="checked", type="boolean")
      */
     private $checked; 
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="tasks")
+     */
+    private $category;
     /**
      * Get id
      *
@@ -127,4 +130,29 @@ class Task
     {
         return $this->dueDate;
     }
+
+    /**
+     * Set checked
+     *
+     * @param boolean $checked
+     * @return Task
+     */
+    public function setChecked($checked)
+    {
+        $this->checked = $checked;
+
+        return $this;
+    }
+
+    /**
+     * Get checked
+     *
+     * @return boolean 
+     */
+    public function getChecked()
+    {
+        return $this->checked;
+    }
+
+
 }

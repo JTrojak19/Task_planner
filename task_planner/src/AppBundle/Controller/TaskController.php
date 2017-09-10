@@ -34,6 +34,7 @@ class TaskController extends Controller
                 ->add('description')
                 ->add('dueDate')
                 ->add('checked')
+                ->add('category')
                 ->getForm(); 
         $form->handleRequest($request); 
         
@@ -71,6 +72,7 @@ class TaskController extends Controller
                 ->add('description')
                 ->add('dueDate')
                 ->add('checked')
+                ->add('category')
                 ->getForm(); 
         $form->handleRequest($request);
         
@@ -80,7 +82,7 @@ class TaskController extends Controller
              $em = $this->getDoctrine()->getManager();
              $em->flush();
              
-              return $this->redirectToRoute('app_task_index', array('id' => $task->getId()));
+              return $this->redirectToRoute('app_task_index');
          }
          return $this->render('modify.html.twig', array(
             'form' => $form->createView(), 

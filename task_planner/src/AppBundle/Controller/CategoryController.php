@@ -35,4 +35,26 @@ class CategoryController extends Controller
             'form' => $form->createView(), 
              ));
     }
+    public function removeCategoryAction(Request $request, $id)
+    {
+        $category = new Category(); 
+        
+        $category = $this->getDoctrine()
+                ->getRepository('AppBundle:Category')
+                ->find($id); 
+        
+        if (!$category)
+        {
+            throw $this->createNotFoundException('Category not found'); 
+        }
+        
+        $em = $this
+            ->getDoctrine()
+            ->getManager();
+
+        $em->remove($category);
+        $em->flush(); 
+        
+        return $this->redirectToRoute('app_task_index'); 
+    }
 }
