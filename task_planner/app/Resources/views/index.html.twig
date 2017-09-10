@@ -6,6 +6,7 @@
     </head>
     <body>
         <h1>Task Planner</h1>
+        <a href="{{path('app_task_addtask')}}">Add</a>
         {% for task in tasks%}
             <p>Task: {{task.name}}</p>
             <p>Description: {{task.description}}</p>

@@ -33,6 +33,7 @@ class TaskController extends Controller
                 ->add('name')
                 ->add('description')
                 ->add('dueDate')
+                ->add('checked')
                 ->getForm(); 
         $form->handleRequest($request); 
         
@@ -42,7 +43,7 @@ class TaskController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
-            return new Response('<body>Task added</body>');
+            return $this->redirectToRoute('app_task_index'); 
         }
         return $this->render('new_task.html.twig', array(
             'form' => $form->createView(), 
