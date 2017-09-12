@@ -60,6 +60,11 @@ class Task
      */
     private $category;
     /**
+     *
+     * @ORM\OneToMany(targetEntity = "AppBundle\Entity\Comment", mappedBy = "task")
+     */
+    private $comments; 
+    /**
      * Get id
      *
      * @return integer 
@@ -184,5 +189,28 @@ class Task
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param integer $priority
+     * @return Task
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer 
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 }

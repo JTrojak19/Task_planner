@@ -60,6 +60,11 @@ class Task
      */
     private $category;
     /**
+     *
+     * @ORM\OneToMany(targetEntity = "AppBundle\Entity\Comment", mappedBy = "task")
+     */
+    private $comments; 
+    /**
      * Get id
      *
      * @return integer 
@@ -207,5 +212,45 @@ class Task
     public function getPriority()
     {
         return $this->priority;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \AppBundle\Entity\Comment $comments
+     * @return Task
+     */
+    public function addComment(\AppBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \AppBundle\Entity\Comment $comments
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
