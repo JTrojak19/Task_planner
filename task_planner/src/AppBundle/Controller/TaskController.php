@@ -38,6 +38,7 @@ class TaskController extends Controller
                 ->add('description')
                 ->add('dueDate')
                 ->add('checked')
+                ->add('priority')
                 ->add('category', null, ['choice_label' => 'name'])
                 ->getForm(); 
         $form->handleRequest($request); 
@@ -76,6 +77,7 @@ class TaskController extends Controller
                 ->add('description')
                 ->add('dueDate')
                 ->add('checked')
+                ->add('priority')
                 ->add('category', null, ['choice_label' => 'name'])
                 ->getForm(); 
         $form->handleRequest($request);

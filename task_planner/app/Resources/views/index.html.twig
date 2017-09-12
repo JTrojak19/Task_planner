@@ -16,6 +16,7 @@
             {% else %}
                 <p>Checked: Yes</p>
             {%endif%}
+            <p>Priority: {{task.priority}}</p>
             <p>Category: {{task.category.name}}</p>
             <a href="{{path('app_task_modify', {'id': task.id})}}">Edit</a>
             <a href="{{path('app_task_delete', {'id': task.id})}}">Delete</a>

@@ -49,6 +49,13 @@ class Task
      */
     private $checked; 
     /**
+     *
+     * @var priority 
+     * 
+     * @ORM\Column(name="priority", type="integer")
+     */
+    private $priority; 
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="tasks")
      */
     private $category;
@@ -155,4 +162,27 @@ class Task
     }
 
 
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     * @return Task
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }
