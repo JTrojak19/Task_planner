@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Task; 
 use AppBundle\Entity\Category; 
+use AppBundle\Entity\Comment;
 
 class TaskController extends Controller
 {
