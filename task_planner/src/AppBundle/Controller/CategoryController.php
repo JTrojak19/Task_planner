@@ -31,10 +31,18 @@ class CategoryController extends Controller
             $em->flush();
             return $this->redirectToRoute('app_task_index'); 
         }
+        $categories = $this->getDoctrine()
+                ->getRepository('AppBundle:Category')
+                ->findAll(); 
+        
         return $this->render('add_category.html.twig', array(
-            'form' => $form->createView(), 
+            'form' => $form->createView(), 'categories' => $categories
              ));
     }
+    /**
+     * 
+     * @Route("/{id}/category/delete")
+     */
     public function removeCategoryAction(Request $request, $id)
     {
         $category = new Category(); 
@@ -57,4 +65,5 @@ class CategoryController extends Controller
         
         return $this->redirectToRoute('app_task_index'); 
     }
+    
 }
