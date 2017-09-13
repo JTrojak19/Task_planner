@@ -24,7 +24,10 @@ class TaskController extends Controller
         $category = $this->getDoctrine()
                 ->getRepository('AppBundle:Category')
                 ->findAll(); 
-        return $this->render('index.html.twig', array('tasks' => $tasks, 'category' => $category));
+        $comments = $this->getDoctrine()
+                ->getRepository('AppBundle:Comment')
+                ->findAll(); 
+        return $this->render('index.html.twig', array('tasks' => $tasks, 'category' => $category, 'comments' => $comments));
     }
     /**
      * 
