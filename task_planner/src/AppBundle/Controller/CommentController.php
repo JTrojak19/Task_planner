@@ -15,20 +15,27 @@ class CommentController extends Controller
      * 
      * @Route("/comment/{id}/add")
      */
-    public function addNewCommentAction(Request $request)
+    public function addNewCommentAction(Request $request, $id)
     {
         $comment = new Comment(); 
-        $task = new Task(); 
+        $task = new Task();
+        $task = $this->getDoctrine()
+                ->getRepository('AppBundle:Task')
+                ->find($id); 
+        
+        if (!$task) {
+            throw $this->createNotFoundException('Author not found');
+        }
         
         $form = $this->createFormBuilder($comment)
                 ->add('text')
-                ->add('task', null, ['choice_label' => 'name'])
                 ->getForm(); 
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid())
         {
             $comment = $form->getData(); 
+            $comment->setTask($task);
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
