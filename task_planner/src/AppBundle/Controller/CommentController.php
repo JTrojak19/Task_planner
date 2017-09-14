@@ -46,5 +46,17 @@ class CommentController extends Controller
             'form' => $form->createView()
              ));
     }
+    /**
+     * 
+     * @Route("/comment/{id}/show")
+     */
+    public function showCommentsByTaskAction($id)
+    {
+        $comments = $this->getDoctrine()
+                ->getRepository('AppBundle:Comment')
+                ->findBy(['task' => $id]);
+        var_dump($comments);
+        return $this->render('show_comments.html.twig', ['comments' => $comments]); 
+    }
 
 }

@@ -18,16 +18,11 @@
             {%endif%}
             <p>Priority: {{task.priority}}</p>
             <p>Category: {{task.category.name}}</p>
-            <p>Comments:</p>
-            <ul>
-                {%for comment in comments%}
-                    <li>{{comment.text}}</li>
-                {%endfor%}
-            </ul>
             <a href="{{path('app_task_modify', {'id': task.id})}}">Edit</a>
             <a href="{{path('app_task_delete', {'id': task.id})}}">Delete</a>
             <a href="{{path('app_category_addcategory')}}">Add Category</a>
             <a href="{{path('app_comment_addnewcomment', {'id': task.id})}}">Add Comment</a>
+            <a href="{{path(' app_comment_showcommentsbytask', {'id': task.id})}}">Show comments</a>
         {%endfor%}
     </body>
 </html>
