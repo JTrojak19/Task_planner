@@ -55,7 +55,6 @@ class CommentController extends Controller
         $comments = $this->getDoctrine()
                 ->getRepository('AppBundle:Comment')
                 ->findBy(['task' => $id]);
-        var_dump($comments);
         return $this->render('show_comments.html.twig', ['comments' => $comments]); 
     }
 
