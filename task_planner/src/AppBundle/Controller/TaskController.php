@@ -14,7 +14,7 @@ class TaskController extends Controller
 {
     /**
      * 
-     * @Route("/")
+     * @Route("/task")
      */
     public function indexAction()
     {
