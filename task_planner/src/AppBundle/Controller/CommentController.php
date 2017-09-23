@@ -19,13 +19,12 @@ class CommentController extends Controller
     public function addNewCommentAction(Request $request, $id)
     {
         $comment = new Comment(); 
-        $task = new Task();
         $task = $this->getDoctrine()
                 ->getRepository('AppBundle:Task')
                 ->find($id); 
         
         if (!$task) {
-            throw $this->createNotFoundException('Author not found');
+            throw $this->createNotFoundException('Task not found');
         }
         
         $form = $this->createFormBuilder($comment)
@@ -56,6 +55,18 @@ class CommentController extends Controller
                 ->getRepository('AppBundle:Comment')
                 ->findBy(['task' => $id]);
         return $this->render('show_comments.html.twig', ['comments' => $comments]); 
+    }
+    /**
+     * 
+     * @Route("/count/{id}")
+     */
+    public function countCommentsByTaskAction($id)
+    {
+        $comments = $this->getDoctrine()
+                ->getRepository('AppBundle:Comment')
+                ->findBy(['task' => $id]);
+        $numberComments = count($comments); 
+        return $this->render('index.html.twig', ['comments' => $numberComments]); 
     }
 
 }

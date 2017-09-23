@@ -14,16 +14,16 @@ class TaskController extends Controller
 {
     /**
      * 
-     * @Route("/task")
+     * @Route("/")
      */
     public function indexAction()
     {
         $tasks = $this->getDoctrine()
                 ->getRepository('AppBundle:Task')
-                ->findAll(); 
+                ->findBy([],['dueDate' => 'ASC']); 
         $category = $this->getDoctrine()
                 ->getRepository('AppBundle:Category')
-                ->findAll();  
+                ->findAll();          
         return $this->render('index.html.twig', array('tasks' => $tasks, 'category' => $category,));
     }
     /**
