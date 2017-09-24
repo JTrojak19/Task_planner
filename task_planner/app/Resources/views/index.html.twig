@@ -7,6 +7,7 @@
     <body>
         <h1>Task Planner</h1>
         <a href="{{path('app_task_addtask')}}">Add</a>
+        <a href="{{path('fos_user_security_logout')}}">Logout</a>
         <table>
         {% for task in tasks%}
             <p>Task: {{task.name}}</p>
@@ -22,12 +23,18 @@
             <p>Category: {{task.category.name}}</p>
             {%endif%}
             {%if task.checked == false%}
+                <br>
             <a href="{{path('app_task_modify', {'id': task.id})}}">Edit</a>
             {%endif%}
+            <br>
             <a href="{{path('app_task_delete', {'id': task.id})}}">Delete</a>
+            <br>
             <a href="{{path('app_category_addcategory')}}">Add Category</a>
+            <br>
             <a href="{{path('app_comment_addnewcomment', {'id': task.id})}}">Add Comment</a>
+            <br>
             <a href="{{path('app_comment_showcommentsbytask', {'id': task.id})}}">Show comments</a>
         {%endfor%}
+        <br>
     </body>
 </html>
