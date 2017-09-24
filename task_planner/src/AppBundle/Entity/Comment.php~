@@ -65,4 +65,27 @@ class Comment
     {
         return $this->text;
     }
+
+    /**
+     * Set task
+     *
+     * @param \AppBundle\Entity\Task $task
+     * @return Comment
+     */
+    public function setTask(\AppBundle\Entity\Task $task = null)
+    {
+        $this->task = $task;
+
+        return $this;
+    }
+
+    /**
+     * Get task
+     *
+     * @return \AppBundle\Entity\Task 
+     */
+    public function getTask()
+    {
+        return $this->task;
+    }
 }

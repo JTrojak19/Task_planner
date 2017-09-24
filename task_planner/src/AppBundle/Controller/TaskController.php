@@ -20,7 +20,7 @@ class TaskController extends Controller
     {
         $tasks = $this->getDoctrine()
                 ->getRepository('AppBundle:Task')
-                ->findBy([],['dueDate' => 'ASC']); 
+                ->findBy(['user' => $this->getUser()]);
         $category = $this->getDoctrine()
                 ->getRepository('AppBundle:Category')
                 ->findAll();          
@@ -47,6 +47,7 @@ class TaskController extends Controller
         if ($form->isSubmitted() && $form->isValid())
         {
             $task = $form->getData(); 
+            $task->setUser($this->getUser()); 
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
@@ -66,11 +67,15 @@ class TaskController extends Controller
         $task = new Task(); 
         $task = $this->getDoctrine()
                 ->getRepository('AppBundle:Task')
-                ->find($id); 
+                ->find($id)
+                ; 
         
         if (!$task)
         {
             throw $this->createNotFoundException('Task not found');
+        }
+        if ($task->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('Access denied');
         }
         
         $form = $this->createFormBuilder($task)
@@ -86,6 +91,7 @@ class TaskController extends Controller
         if ($form->isSubmitted() && $form->isValid())
          {
              $task = $form->getData();
+             $task->setUser($this->getUser());
              $em = $this->getDoctrine()->getManager();
              $em->flush();
              
@@ -104,11 +110,15 @@ class TaskController extends Controller
         $task = new Task(); 
         $task = $this->getDoctrine()
                 ->getRepository('AppBundle:Task')
-                ->find($id); 
+                ->find($id)
+                ; 
         
         if (!$task)
         {
             throw $this->createNotFoundException('Task not found'); 
+        }
+        if ($task->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('Access denied');
         }
         
         $em = $this

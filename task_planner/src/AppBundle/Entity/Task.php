@@ -65,6 +65,11 @@ class Task
      */
     private $comments; 
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="tasks")
+     */
+    private $user; 
+    /**
      * Get id
      *
      * @return integer 
@@ -165,6 +170,7 @@ class Task
     {
         return $this->checked;
     }
+ 
 
 
 
@@ -252,5 +258,28 @@ class Task
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     * @return Task
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

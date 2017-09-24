@@ -18,7 +18,9 @@
                 <p>Checked: Yes</p>
             {%endif%}
             <p>Priority: {{task.priority}}</p>
+            {% if task.category %}
             <p>Category: {{task.category.name}}</p>
+            {%endif%}
             {%if task.checked == false%}
             <a href="{{path('app_task_modify', {'id': task.id})}}">Edit</a>
             {%endif%}
