@@ -22,6 +22,9 @@
             {% if task.category %}
             <p>Category: {{task.category.name}}</p>
             {%endif%}
+            {%for comment in comments%}
+            <p>Comments: {{comment|length}}</p>
+            {%endfor%}
             {%if task.checked == false%}
                 <br>
             <a href="{{path('app_task_modify', {'id': task.id})}}">Edit</a>

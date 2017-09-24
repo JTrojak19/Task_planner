@@ -23,8 +23,12 @@ class TaskController extends Controller
                 ->findBy(['user' => $this->getUser()]);
         $category = $this->getDoctrine()
                 ->getRepository('AppBundle:Category')
-                ->findAll();          
-        return $this->render('index.html.twig', array('tasks' => $tasks, 'category' => $category,));
+                ->findAll(); 
+        $comments = $this->getDoctrine()
+                ->getRepository('AppBundle:Comment')
+                ->findAll();
+        return $this->render('index.html.twig', array('tasks' => $tasks, 'category' => $category,
+            'comments' => $comments));
     }
     /**
      * 
